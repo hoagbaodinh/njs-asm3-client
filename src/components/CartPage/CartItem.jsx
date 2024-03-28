@@ -77,10 +77,14 @@ const CartItem = (props) => {
       dispatch(cartActions.deleteItemFormCart(_id));
 
       if (userId) {
-        axios.put(`${http}/api/cart/delete-item`, {
-          userId: userId,
-          productId: _id,
-        });
+        axios.put(
+          `${http}/api/cart/delete-item`,
+          {
+            userId: userId,
+            productId: _id,
+          },
+          { withCredentials: true }
+        );
       }
     } else return;
   };
