@@ -10,6 +10,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [isDisable, setIsDisable] = useState(false);
 
   const currentUser = getFromStorage('currentUser');
 
@@ -39,6 +40,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
         items,
         totalPrice,
       };
+      setIsDisable(true);
 
       try {
         await axios.post(`${http}/api/order/create`, data, {
@@ -64,6 +66,8 @@ const CheckoutForm = ({ items, totalPrice }) => {
       // chuyen huong ve trang chu
     } else {
       window.alert('You must fill all required fields!');
+      setIsDisable(false);
+
       return navigate('/checkout');
     }
   };
@@ -113,7 +117,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
           onChange={(e) => setAddress(e.target.value)}
         />
       </div>
-      <button className="primary-button" type="submit">
+      <button className="primary-button" type="submit" disabled={isDisable}>
         Place Order
       </button>
     </Form>
