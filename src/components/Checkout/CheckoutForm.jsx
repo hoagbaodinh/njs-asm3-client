@@ -13,6 +13,8 @@ const CheckoutForm = ({ items, totalPrice }) => {
 
   const currentUser = getFromStorage('currentUser');
 
+  const http = process.env.REACT_APP_API;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
       };
       console.log(data);
       try {
-        await axios.post('http://localhost:5050/api/order/create', data, {
+        await axios.post(`${http}/api/order/create`, data, {
           withCredentials: true,
         });
 

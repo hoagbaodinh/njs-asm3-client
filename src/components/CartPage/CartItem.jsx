@@ -13,6 +13,8 @@ const CartItem = (props) => {
   const formatTotalPrice = formatPrice(totalPrice);
   const currentUser = getFromStorage('currentUser');
 
+  const http = process.env.REACT_APP_API;
+
   // Disable increase button
   useEffect(() => {
     if (quantity >= stock) {
@@ -39,7 +41,7 @@ const CartItem = (props) => {
     );
     if (userId)
       axios.post(
-        'http://localhost:5050/api/cart/add-item',
+        `${http}/api/cart/add-item`,
         {
           userId,
           productId: _id,
@@ -59,7 +61,7 @@ const CartItem = (props) => {
 
     if (userId) {
       axios.put(
-        'http://localhost:5050/api/cart/remove-item',
+        `${http}/api/cart/remove-item`,
         {
           userId: userId,
           productId: _id,
@@ -75,7 +77,7 @@ const CartItem = (props) => {
       dispatch(cartActions.deleteItemFormCart(_id));
 
       if (userId) {
-        axios.put('http://localhost:5050/api/cart/delete-item', {
+        axios.put(`${http}/api/cart/delete-item`, {
           userId: userId,
           productId: _id,
         });
@@ -97,11 +99,7 @@ const CartItem = (props) => {
       {/* Image */}
       <div className="cartGridItem cartItemImg">
         <img
-          src={`${
-            image.includes('http')
-              ? image
-              : `http://localhost:5050/images/${image}`
-          }`}
+          src={`${image.includes('http') ? image : `${http}/images/${image}`}`}
           alt="cart item"
         />
       </div>

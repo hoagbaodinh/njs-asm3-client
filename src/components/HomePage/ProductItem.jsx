@@ -5,6 +5,7 @@ import ProductDetail from './ProductDetail';
 const ProductItem = ({ product }) => {
   const [isShowingDetail, setIsShowingDetail] = useState(false);
   const { name, price, img1 } = product;
+  const http = process.env.REACT_APP_API;
 
   const handleDone = () => {
     setIsShowingDetail(false);
@@ -23,11 +24,7 @@ const ProductItem = ({ product }) => {
       <div className="col-3">
         <div className="pdItemContent">
           <img
-            src={`${
-              img1.includes('http')
-                ? img1
-                : `http://localhost:5050/images/${img1}`
-            }`}
+            src={`${img1.includes('http') ? img1 : `${http}/images/${img1}`}`}
             alt="pd item"
             className="pdItemImg"
             onClick={handleClick}

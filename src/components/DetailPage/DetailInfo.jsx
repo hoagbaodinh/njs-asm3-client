@@ -18,6 +18,8 @@ const DetailInfo = ({ product }) => {
   // Function format giá
   const price = formatPrice(product.price);
 
+  const http = process.env.REACT_APP_API;
+
   // Thêm item vào cart theo số lượng
   const addItemToCartHandler = () => {
     if (+quantityNum) setSuccess(true);
@@ -37,7 +39,7 @@ const DetailInfo = ({ product }) => {
     //Neu co user dang login thi luu vao db
     if (userId)
       axios.post(
-        'http://localhost:5050/api/cart/add-item',
+        `${http}/api/cart/add-item`,
         {
           userId,
           productId: product._id,

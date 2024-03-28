@@ -8,6 +8,8 @@ const DetailImgs = ({ product }) => {
     product.img4 || '',
   ];
 
+  const http = process.env.REACT_APP_API;
+
   const [currentImg, setCurrentImg] = useState(product.img1 || '');
 
   //  thay doi hinh anh khi product thay doi
@@ -22,9 +24,7 @@ const DetailImgs = ({ product }) => {
             imgs.map((img, i) => (
               <img
                 src={`${
-                  img && img?.includes('http')
-                    ? img
-                    : `http://localhost:5050/images/${img}`
+                  img && img?.includes('http') ? img : `${http}/images/${img}`
                 }`}
                 alt="thumb"
                 key={i}
@@ -38,7 +38,7 @@ const DetailImgs = ({ product }) => {
           src={`${
             currentImg.includes('http')
               ? currentImg
-              : `http://localhost:5050/images/${currentImg}`
+              : `${http}/images/${currentImg}`
           }`}
           alt="main"
           style={{ padding: '0 0.5rem' }}
