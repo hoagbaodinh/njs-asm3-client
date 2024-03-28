@@ -39,7 +39,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
         items,
         totalPrice,
       };
-      console.log(data);
+
       try {
         await axios.post(`${http}/api/order/create`, data, {
           withCredentials: true,
@@ -57,7 +57,7 @@ const CheckoutForm = ({ items, totalPrice }) => {
       } catch (error) {
         if (error.response) {
           window.alert('Something went wrong!');
-          console.log(error.response);
+          return;
         }
       }
 

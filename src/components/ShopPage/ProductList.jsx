@@ -28,6 +28,7 @@ const ProductList = () => {
   }, [cateIsShowing]);
   useEffect(() => {
     reFetch();
+    window.scrollTo(0, 300);
     // eslint-disable-next-line
   }, [pageNum]);
 

@@ -7,7 +7,11 @@ const RelatedPdsList = ({ products }) => {
   const navigate = useNavigate();
   const handleClick = (pd) => {
     navigate(`/detail/${pd._id}`);
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 300,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
   return (
     <>

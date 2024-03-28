@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
-import formatPrice from "../../util/format-price";
+import { useSelector } from 'react-redux';
+import formatPrice from '../../util/format-price';
 
 const CartTotal = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
-  console.log(totalPrice);
 
   const fmTotalPrice = formatPrice(totalPrice);
   return (

@@ -7,6 +7,7 @@ import ChatMes from '../LiveChat/ChatMes';
 import axios from 'axios';
 import { getFromStorage, saveToStorage } from '../../util/local-storage';
 
+const socket = openSocket(process.env.REACT_APP_API);
 const LiveChat = () => {
   // State
   const [isShowingChat, setIsShowingChat] = useState(false);
@@ -18,18 +19,16 @@ const LiveChat = () => {
 
   const scrollRef = useRef();
   const http = process.env.REACT_APP_API;
-  const socket = openSocket(http);
 
   // Lang nghe socket messages
-  useEffect(() => {
-    socket.on('getMessage', (data) => {
-      setArrivalMessage({
-        isConsultant: data.isConsultant,
-        text: data.text,
-        createdAt: Date.now(),
-      });
+
+  socket.on('getMessage', (data) => {
+    setArrivalMessage({
+      isConsultant: data.isConsultant,
+      text: data.text,
+      createdAt: Date.now(),
     });
-  }, [socket]);
+  });
 
   // Them message vao log
   useEffect(() => {
@@ -265,8 +264,8 @@ const LiveChat = () => {
 
             <div className="liveChatContent">
               {messages.length !== 0 &&
-                messages?.map((m) => (
-                  <div ref={scrollRef} key={m._id}>
+                messages?.map((m, i) => (
+                  <div ref={scrollRef} key={i}>
                     <ChatMes message={m} owner={!m?.isConsultant} />
                   </div>
                 ))}

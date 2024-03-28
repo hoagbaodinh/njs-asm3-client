@@ -30,6 +30,7 @@ const AuthForm = () => {
     if (isLogin) {
       if (!email || !password) {
         window.alert('You must fill all the required fields');
+        return;
       }
       const authData = {
         email,
@@ -73,7 +74,8 @@ const AuthForm = () => {
         return navigate('/');
       } catch (error) {
         if (error.response) {
-          window.alert('Email or Password incorrect!');
+          window.alert(error.response.data.message);
+          console.clear();
           setPassword('');
           setIsDisable(false);
           navigate('/login?mode=login');
@@ -100,7 +102,8 @@ const AuthForm = () => {
         return navigate('/login?mode=login');
       } catch (error) {
         if (error.response) {
-          window.alert('Something went wrong');
+          window.alert(error.response.data.message);
+          console.clear();
           setIsDisable(false);
           navigate('/login?mode=signup');
         }

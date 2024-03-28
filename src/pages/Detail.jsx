@@ -5,11 +5,19 @@ import DetailInfo from '../components/DetailPage/DetailInfo';
 import DetailDescription from '../components/DetailPage/DetailDescription';
 import RelatedPds from '../components/DetailPage/RelatedPds';
 import useFetch from '../hooks/useFetch';
+import { useEffect } from 'react';
 
 const DetailPage = () => {
   // Lay product co id
   const { detailId } = useParams();
-  const { data, loading } = useFetch('products/get-product/' + detailId);
+  const { data, loading, reFetch } = useFetch(
+    'products/get-product/' + detailId
+  );
+
+  useEffect(() => {
+    reFetch();
+    // eslint-disable-next-line
+  }, [detailId]);
 
   return (
     <>
